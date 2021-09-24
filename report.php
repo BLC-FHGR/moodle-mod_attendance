@@ -75,7 +75,7 @@ $event->add_record_snapshot('course_modules', $cm);
 $event->add_record_snapshot('attendance', $attrecord);
 $event->trigger();
 
-$title = get_string('attendanceforthecourse', 'attendance').' :: ' .format_string($course->fullname);
+$title = get_string('attendanceforthecourse', 'attendance').' : ' .format_string($course->fullname);
 $header = new mod_attendance_header($att, $title);
 
 // Output starts here.

@@ -84,7 +84,7 @@ $filtercontrols = new attendance_filter_controls($att);
 $sesstable = new attendance_manage_data($att);
 
 
-$title = get_string('attendanceforthecourse', 'attendance').' :: ' .format_string($course->fullname);
+$title = get_string('attendanceforthecourse', 'attendance').' : ' .format_string($course->fullname);
 $header = new mod_attendance_header($att, $title);
 
 // Output starts here.
