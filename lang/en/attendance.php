@@ -172,6 +172,7 @@ $string['downloadtext'] = 'Download in text format';
 $string['duration'] = 'Duration';
 $string['editsession'] = 'Edit Session';
 $string['edituser'] = 'Edit user';
+$string['email'] = 'Email';
 $string['emailcontent'] = 'Email content';
 $string['emailcontent_default'] = 'Hi %userfirstname%,
 Your attendance in %coursename% %attendancename% has dropped below %warningpercent% and is currently %percent% - we hope you are ok!
