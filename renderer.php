@@ -756,6 +756,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
                 });");
 
         }
+        $table->head[] = get_string('covidcert', 'attendance'); //FHGR - Added new column title
 
         $table->head[] = get_string('remarks', 'attendance');
         $table->align[] = 'center';
@@ -797,6 +798,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
                 });");
         }
         $row->cells[] = '';
+        $row->cells[] = ''; //FHGR - Added extra cell for covid column
         $table->data[] = $row;
 
         $i = 0;
@@ -981,6 +983,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
 
                 $celldata['text'][] = $input;
             }
+            $celldata['text'][] = html_writer::div('COVID CERT DATE', 'text-nowrap'); //FHGR - Added new covid cert cell for every user
             $params = array(
                     'type'  => 'text',
                     'name'  => 'remarks'.$user->id,

@@ -349,6 +349,8 @@ class attendance_take_data implements renderable {
     /** @var array  */
     public $sessionlog;
     /** @var array  */
+    public $covidcerts;
+    /** @var array  */
     public $sessions4copy;
     /** @var bool  */
     public $updatemode;
