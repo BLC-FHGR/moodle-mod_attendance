@@ -1269,11 +1269,13 @@ class mod_attendance_structure {
         }
         if ($tempuser = $DB->get_record('attendance_tempusers', array('email' => $email), 'id')) {
             if ($tempuser->id != $tempuserid) {
-                return get_string('tempexists', 'attendance');
+                //return get_string('tempexists', 'attendance');
+                return null;
             }
         }
         if ($DB->record_exists('user', array('email' => $email))) {
-            return get_string('userexists', 'attendance');
+            //return get_string('userexists', 'attendance');
+            return null;
         }
 
         return null;
