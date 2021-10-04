@@ -1063,15 +1063,16 @@ class mod_attendance_structure {
      * @param int $studentid
      * @return array
      */
-    public function get_covidcerts($studentid) : array {
+    public function get_covidcerts($sessionid) : array {
         global $DB;
         //Probably need to join 3 tables
         $query= "SELECT uid.userid, uid.data 
         FROM moodle.mdl_user_info_data AS uid
         INNER JOIN moodle.mdl_user_info_field AS uif ON uid.fieldid=uif.id
-        WHERE uif.shortname = 'covidcert' AND userid=?;" ;
-        return $DB->get_record_sql($query, [$studentid]);
-        //return $DB->get_records('user_info_data', array('studentid' => $studentid), '', 'studentid,statusid,remarks,id,statusset');
+        INNER JOIN moodle.mdl_attendance_log AS atl ON uid.userid=atl.studentid
+        WHERE uif.shortname = 'covidcert' AND sessionid=?;" ;
+        
+        return $DB->get_records_sql($query, [$sessionid]);
     }
 
     /**

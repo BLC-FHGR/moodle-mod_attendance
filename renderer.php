@@ -983,7 +983,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
 
                 $celldata['text'][] = $input;
             }
-            $celldata['text'][] = html_writer::div('COVID CERT DATE', 'text-nowrap'); //FHGR - Added new covid cert cell for every user
+            $celldata['text'][] = html_writer::div(($takedata->covidcerts[$user->id]->data, 'text-nowrap'); //FHGR - Added new covid cert cell for every user
             $params = array(
                     'type'  => 'text',
                     'name'  => 'remarks'.$user->id,

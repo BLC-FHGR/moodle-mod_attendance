@@ -394,6 +394,9 @@ class attendance_take_data implements renderable {
             $this->sessions4copy = $att->get_today_sessions_for_copy($this->sessioninfo);
         }
 
+        //FHGR - get covid cert data
+        $this->covidcerts = $att->get_covidcerts($att->pageparams->sessionid);
+
         $this->urlpath = $att->url_take()->out_omit_querystring();
         $params = $att->pageparams->get_significant_params();
         $params['id'] = $att->cm->id;
