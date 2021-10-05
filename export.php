@@ -95,6 +95,7 @@ if ($formdata = $mform->get_data()) {
         $data->tabhead[] = get_string('lastname');
         $data->tabhead[] = get_string('firstname');
         //$data->tabhead[] = get_string('email'); --FHGR - old not required anymore
+        $data->tabhead[] = get_string('covidcert'); // FHGR - add covid cert column
         $groupmode = groups_get_activity_groupmode($cm, $course);
         if (!empty($groupmode)) {
             $data->tabhead[] = get_string('groups');
@@ -160,6 +161,7 @@ if ($formdata = $mform->get_data()) {
             $data->table[$i][] = $user->lastname;
             $data->table[$i][] = $user->firstname;
             //$data->table[$i][] = $user->email; --FHGR - old not required anymore
+            $data->table[$i][] = $att->covidcerts[$user->id]->data;
             if (!empty($groupmode)) {
                 $grouptext = '';
                 $groupsraw = groups_get_all_groups($course->id, $user->id, 0, 'g.name');

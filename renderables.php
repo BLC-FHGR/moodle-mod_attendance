@@ -696,6 +696,8 @@ class attendance_report_data implements renderable {
     public $sessions;
     /** @var array  */
     public $statuses;
+    /** @var array  */
+    public $covidcerts;
     /** @var array includes disablrd/deleted statuses. */
     public $allstatuses;
     /** @var array  */
@@ -727,7 +729,8 @@ class attendance_report_data implements renderable {
         $this->groups = groups_get_all_groups($att->course->id);
 
         $this->sessions = $att->get_filtered_sessions();
-
+        //FHGR - get covid cert data
+        $this->covidcerts = $att->get_covidcerts($this->users);
         $this->statuses = $att->get_statuses(true, true);
         $this->allstatuses = attendance_get_statuses($att->id, false);
 
