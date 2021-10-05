@@ -985,9 +985,9 @@ class mod_attendance_renderer extends plugin_renderer_base {
             }
             //FHGR - Added new covid cert cell for a user
             if(array_key_exists($user->id, $takedata->covidcerts)){
-                $celldata['text'][] = html_writer::div(($takedata->covidcerts[$user->id]->data, 'text-nowrap'); 
+                $celldata['text'][] = html_writer::div($takedata->covidcerts[$user->id]->data, 'text-nowrap'); 
             }else{
-                $celldata['text'][] = html_writer::div(("");
+                $celldata['text'][] = html_writer::div("");
             }
             $params = array(
                     'type'  => 'text',
