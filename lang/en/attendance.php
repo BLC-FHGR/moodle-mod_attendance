@@ -121,7 +121,7 @@ $string['course'] = 'Course';
 $string['coursemessage'] = 'Message course users';
 $string['courseshortname'] = 'Course shortname';
 $string['coursesummary'] = 'Course summary report';
-$string['covidcert'] = 'Covid Certificate';
+$string['covidcert'] = 'Covid';
 $string['createmultiplesessions'] = 'Create multiple sessions';
 $string['createmultiplesessions_help'] = 'This function allows you to create multiple sessions in one simple step.
 The sessions begin on the date of the base session and continue until the \'repeat until\' date.

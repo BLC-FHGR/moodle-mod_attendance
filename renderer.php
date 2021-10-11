@@ -572,12 +572,13 @@ class mod_attendance_renderer extends plugin_renderer_base {
         }
         //compare date with current date
         $certdatetmp = strtotime($certdate);
-        if($certdatetmp >= strtotime("+5 days")){
-            $result = '&#x1F7E2';
-        }elseif ($certdatetmp >= strtotime("now")){
-            $result = '&#x1F7E0';
+        if($certdatetmp >= date("d.m.Y", strtotime("now")){
+            $result = '&#x1F7E2 ';
+        // When third state is necessary (orange)    
+        // }elseif ($certdatetmp >= strtotime("now") || $certdate == date("d.m.Y", strtotime("now"))){
+        //   $result = '&#x1F7E0 ';
         }else {
-            $result = '&#x1F534';
+            $result = '&#x1F534 ';
         }
         return $result;
     }
@@ -1010,7 +1011,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
             if(array_key_exists($user->id, $takedata->covidcerts) && strlen($takedata->covidcerts[$user->id]->data)>1 ){
                 $certtexttmp = $takedata->covidcerts[$user->id]->data;
                 
-                $celldata['text'][] = html_writer::div(add_certinfo_icon($certtexttmp) . $certtexttmp, 'text-nowrap'); 
+                $celldata['text'][] = html_writer::div($this->add_certinfo_icon($certtexttmp) . $certtexttmp, 'text-nowrap'); 
             }else{
                 $celldata['text'][] = html_writer::div("");
             }
