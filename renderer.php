@@ -560,6 +560,29 @@ class mod_attendance_renderer extends plugin_renderer_base {
     }
 
     /**
+     * FHGR -- Add covid symbol. 
+     * 
+     * @param string $certdate
+     * @return string
+     */
+    protected function add_certinfo_icon($certdate){
+        $result = '';
+        if(!strtotime($certdate)){
+            return $result;
+        }
+        //compare date with current date
+        $certdatetmp = strtotime($certdate);
+        if($certdatetmp >= strtotime("+5 days")){
+            $result = '&#x1F7E2';
+        }elseif ($certdatetmp >= strtotime("now")){
+            $result = '&#x1F7E0';
+        }else {
+            $result = '&#x1F534';
+        }
+        return $result;
+    }
+
+    /**
      * Construct take session info.
      *
      * @param attendance_take_data $takedata
@@ -984,8 +1007,10 @@ class mod_attendance_renderer extends plugin_renderer_base {
                 $celldata['text'][] = $input;
             }
             //FHGR - Added new covid cert cell for a user
-            if(array_key_exists($user->id, $takedata->covidcerts)){
-                $celldata['text'][] = html_writer::div($takedata->covidcerts[$user->id]->data, 'text-nowrap'); 
+            if(array_key_exists($user->id, $takedata->covidcerts) && strlen($takedata->covidcerts[$user->id]->data)>1 ){
+                $certtexttmp = $takedata->covidcerts[$user->id]->data;
+                
+                $celldata['text'][] = html_writer::div(add_certinfo_icon($certtexttmp) . $certtexttmp, 'text-nowrap'); 
             }else{
                 $celldata['text'][] = html_writer::div("");
             }
