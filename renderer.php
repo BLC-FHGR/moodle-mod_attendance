@@ -572,12 +572,12 @@ class mod_attendance_renderer extends plugin_renderer_base {
         }
         //compare date with current date
         $certdatetmp = strtotime($certdate);
-        if($certdatetmp >= date("d.m.Y", strtotime("now")){
+        if($certdatetmp >= strtotime("now") || $certdate == date("d.m.Y", strtotime("now"))){
             $result = '&#x1F7E2 ';
         // When third state is necessary (orange)    
         // }elseif ($certdatetmp >= strtotime("now") || $certdate == date("d.m.Y", strtotime("now"))){
         //   $result = '&#x1F7E0 ';
-        }else {
+        } else {
             $result = '&#x1F534 ';
         }
         return $result;
@@ -1010,7 +1010,6 @@ class mod_attendance_renderer extends plugin_renderer_base {
             //FHGR - Added new covid cert cell for a user
             if(array_key_exists($user->id, $takedata->covidcerts) && strlen($takedata->covidcerts[$user->id]->data)>1 ){
                 $certtexttmp = $takedata->covidcerts[$user->id]->data;
-                
                 $celldata['text'][] = html_writer::div($this->add_certinfo_icon($certtexttmp) . $certtexttmp, 'text-nowrap'); 
             }else{
                 $celldata['text'][] = html_writer::div("");
