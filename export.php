@@ -161,11 +161,25 @@ if ($formdata = $mform->get_data()) {
             $data->table[$i][] = $user->lastname;
             $data->table[$i][] = $user->firstname;
             //$data->table[$i][] = $user->email; --FHGR - old not required anymore
-            if(array_key_exists($user->id, $reportdata->covidcerts)){
-                $data->table[$i][] = $reportdata->covidcerts[$user->id]->data;
+            if(array_key_exists($user->id, $reportdata->covidtests) && array_key_exists($user->id, $reportdata->covidcerts)){
+                $testtmp = $reportdata->covidtests[$user->id]->data;
+                $certtmp = $reportdata->covidcerts[$user->id]->data;
+                //FHGR - check which date is more actual
+                if(strtotime($testtmp) > strtotime($certtmp)){
+                    $data->table[$i][] = $testtmp;
+                }else{
+                    $data->table[$i][] = $certtmp;
+                }
+            }elseif(array_key_exists($user->id, $reportdata->covidcerts) && strlen($reportdata->covidcerts[$user->id]->data)>1 ){
+                $certtmp = $reportdata->covidcerts[$user->id]->data;
+                $data->table[$i][] = $certtmp; 
+            }elseif(array_key_exists($user->id, $reportdata->covidtests) && strlen($reportdata->covidtests[$user->id]->data)>1){
+                $testtmp = $reportdata->covidtests[$user->id]->data;
+                $data->table[$i][] = $testtmp;
             }else{
                 $data->table[$i][] = '';
-            }
+            } 
+           
             if (!empty($groupmode)) {
                 $grouptext = '';
                 $groupsraw = groups_get_all_groups($course->id, $user->id, 0, 'g.name');
