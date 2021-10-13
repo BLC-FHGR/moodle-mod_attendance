@@ -1008,9 +1008,21 @@ class mod_attendance_renderer extends plugin_renderer_base {
                 $celldata['text'][] = $input;
             }
             //FHGR - Added new covid cert cell for a user
-            if(array_key_exists($user->id, $takedata->covidcerts) && strlen($takedata->covidcerts[$user->id]->data)>1 ){
-                $certtexttmp = $takedata->covidcerts[$user->id]->data;
-                $celldata['text'][] = html_writer::div($this->add_certinfo_icon($certtexttmp) . $certtexttmp, 'text-nowrap'); 
+            if(array_key_exists($user->id, $takedata->covidtests) && array_key_exists($user->id, $takedata->covidcerts)){
+                $testtmp = $takedata->covidtests[$user->id]->data;
+                $certtmp = $takedata->covidcerts[$user->id]->data;
+                //FHGR - check which date is more actual
+                if(strtotime($testtmp) > strtotime($certtmp)){
+                    $celldata['text'][] = html_writer::div($this->add_certinfo_icon($testtmp) . $testtmp, 'text-nowrap');
+                }else{
+                    $celldata['text'][] = html_writer::div($this->add_certinfo_icon($certtmp) . $certtmp, 'text-nowrap');
+                }
+            }elseif(array_key_exists($user->id, $takedata->covidcerts) && strlen($takedata->covidcerts[$user->id]->data)>1 ){
+                $certtmp = $takedata->covidcerts[$user->id]->data;
+                $celldata['text'][] = html_writer::div($this->add_certinfo_icon($certtmp) . $certtmp, 'text-nowrap'); 
+            }elseif(array_key_exists($user->id, $takedata->covidtests) && strlen($takedata->covidtests[$user->id]->data)>1){
+                $testtmp = $takedata->covidtests[$user->id]->data;
+                $celldata['text'][] = html_writer::div($this->add_certinfo_icon($testtmp) . $testtmp, 'text-nowrap');
             }else{
                 $celldata['text'][] = html_writer::div("");
             }

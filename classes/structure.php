@@ -1058,6 +1058,28 @@ class mod_attendance_structure {
     }
 
     /**
+     * Get covidtest.
+     * 
+     * @param array $users
+     * @return array
+     */
+    public function get_covidtests($users) : array{
+        global $DB;
+        $result = [];
+        foreach ($users as $user){
+            $query= "SELECT uid.userid, uid.data
+              FROM moodle.mdl_user_info_data AS uid
+              INNER JOIN moodle.mdl_user_info_field AS uif ON uid.fieldid=uif.id
+              WHERE uif.shortname = 'covidtest' AND userid=?;";
+            $tmp = $DB->get_record_sql($query, [$user->id]);
+            if($tmp){
+              $result[$tmp->userid] = $tmp;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Get covidcerts.
      *
      * @param array $users
