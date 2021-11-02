@@ -566,7 +566,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
      * @return string
      */
     protected function add_certinfo_icon($certdate){
-        $result = '';
+        $result = '&#x1F534 '; //Red icon as default return
         if(!strtotime($certdate)){
             return $result;
         }
@@ -574,12 +574,10 @@ class mod_attendance_renderer extends plugin_renderer_base {
         $certdatetmp = strtotime($certdate);
         if($certdatetmp >= strtotime("now") || $certdate == date("d.m.Y", strtotime("now"))){
             $result = '&#x1F7E2 ';
+        }
         // When third state is necessary (orange)    
         // }elseif ($certdatetmp >= strtotime("now") || $certdate == date("d.m.Y", strtotime("now"))){
         //   $result = '&#x1F7E0 ';
-        } else {
-            $result = '&#x1F534 ';
-        }
         return $result;
     }
 
@@ -1024,7 +1022,7 @@ class mod_attendance_renderer extends plugin_renderer_base {
                 $testtmp = $takedata->covidtests[$user->id]->data;
                 $celldata['text'][] = html_writer::div($this->add_certinfo_icon($testtmp) . $testtmp, 'text-nowrap');
             }else{
-                $celldata['text'][] = html_writer::div("");
+                $celldata['text'][] = html_writer::div($this->add_certinfo_icon(""), 'text-left'); //FHGR - Add red circle for empty field
             }
             $params = array(
                     'type'  => 'text',
